@@ -1,0 +1,121 @@
+﻿@model Qr.Models.user
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>user</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd id="htmlContent">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Number)
+        </dd>
+
+    </dl>
+</div>
+
+
+<div id="printContent" class="container  " style="display:none">
+
+    <hr />
+
+    <div class="row">
+
+        <dl class="col-lg-6">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Date)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Date)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Number)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Number)
+            </dd>
+
+        </dl>
+        <div class="col-lg-6">
+
+            <img src="@ViewBag.QrCodeUri" width="50%" class="  img-rounded" />
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+
+
+
+    <button class="btn btn-primary" id="printPDF" onclick="printPDF()">Print PDF</button>
+
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
+            integrity="sha512-cLuyDTDg9CSseBSFWNd4wkEaZ0TBEpclX0zD3D6HjI19pO39M58AgJ1SjHp6c7ZOp0/OCRcC2BCvvySU9KJaGw=="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.js" integrity="sha512-sk0cNQsixYVuaLJRG0a/KRJo9KBkwTDqr+/V94YrifZ6qi8+OO3iJEoHi0LvcTVv1HaBbbIvpx+MCjOuLVnwKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>    <script>
+
+        function printPDF() {
+            $("#printContent").css("display", "block");
+
+            html2canvas(document.getElementById('printContent'), { height: document.body.clientHeight, width: document.body.clientWidth }).then(function (canvas) {
+                // document.body.appendChild(canvas);
+                var wid;
+                var hgt;
+
+                var img = canvas.toDataURL("image/png", wid = canvas.width, hgt = canvas.height);
+                var hratio = hgt / wid
+                var doc = new jsPDF('p', 'pt', 'a4');
+                var width = doc.internal.pageSize.width;
+                var height = width * hratio
+                doc.addImage(img, 'JPEG', 20, 20, width, height);
+                doc.save( '@Model.Name .pdf');
+            });
+            $("#printContent").css("display", "none");
+        }
+</script>
+}

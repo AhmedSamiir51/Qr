@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="QrCode2ModelStoreContainer" CdmEntityContainer="QrCode2Entities">
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="QrCode2Model.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="QrCode2Model.user">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="QRCodeText" ColumnName="QRCodeText" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
